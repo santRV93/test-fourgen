@@ -1,61 +1,33 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Instalación
+- Para instalar todas las dependencias del proyecto lo que hay que ejecutar el comando composer install
+- Para ejecutar el proyecto se debe de ingresar el comando php artisan serve
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+# Endpoints
+- Para usar los endpoints es indispensable usar el header accept: application/json
 
-## About Laravel
+## Users (Registro y login)
+- La ruta para registrar usuarios es {{base_url}}/api/auth/register, metodo POST y se deben de ingresar los campos: name, email, password, password_confirmation
+- La ruta para hacer login es {{base_url}}/api/auth/login, método POST y se deben ingresar los campos: email, password
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## People
+- Estos endpoints requiren un authorization tipo Bearer
+- La ruta para registrar personas es {{base_url}}/api/people/create, método POST y se deben de ingresar los campos: name, email, birth_date
+- La ruta para actualizar personas es {{base_url}}/api/people/{{id}}, metodo POST, recibe como url param el id de la persona que se desea actualizar y se deben de ingresar los campos: name, email, birth_date
+- La ruta para borrar personas es {{base_url}}/api/people/{{id}}, método DELETE, recibe como url param el id de la persona que se desea borrar
+- La ruta para obtener todas las personas es {{base_url}}/api/people/get, metodo GET
+- La ruta para obtener los datos de una persona con sus respectivas mascotas es {{base_url}}/api/people/pets/{{id}}, método GET, recibe como url param el id de la persona
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## People
+- Estos endpoints requiren un authorization tipo Bearer
+- La ruta para registrar mascotas es {{base_url}}/api/pets/create, método POST y se deben de ingresar los campos: name, species, age, breed, person_id
+- La ruta para actualizar mascotas es {{base_url}}/api/pets/{{id}}, metodo POST, recibe como url param el id de la mascota que se desea actualizar y se deben de ingresar los campos: name, species, age, breed, person_id
+- La ruta para borrar mascotas es {{base_url}}/api/pets/{{id}}, método DELETE, recibe como url param el id de la mascota que se desea borrar
+- La ruta para obtener todas las mascotas es {{base_url}}/api/pets/get, metodo GET
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# Migraciones
+- Para registrar la estructura de las tablas en la base de datos se debe de ejecutar el comando php artisan migrate
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Seeders
+- Los seeders generan datos de prueba en la base de datos
+- Para ingresar usuarios de prueba se puede ejecutar el comando php artisan db:seed --class=UserSeeder, por defecto el password siempre es abc1234
+- Para registrar mascotas de prueba se puede ejecutar el comando php artisan db:seed --class=PetSeeder. Este comando ya crea personas asociadas a las mascotas
